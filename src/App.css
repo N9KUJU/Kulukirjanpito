@@ -1,0 +1,16 @@
+
+.App {
+    max-width: 30em;
+    margin: 0 auto;
+}
+
+.kulukortti {
+    padding: 1em;
+    border-bottom: 1px solid rgb(51, 153, 73);
+}
+
+.kulukortti__rivi {
+    display: flex;
+    justify-content:space-between;
+}
+
