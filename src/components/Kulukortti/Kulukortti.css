@@ -1,0 +1,20 @@
+.kulukortti {
+    padding: 1em;
+    border-bottom: 1px solid rgb(51, 153, 73);
+}
+
+.kulukortti__rivi {
+    display: flex;
+    justify-content:space-between;
+}
+
+.kulukortti__tyyppi, .kulukortti__summa {
+    font-weight: bold;
+
+}
+
+.kulukortti__maksupaiva, .kulukortti__ajanjakso,
+.kulukortti__maksunsaaja, .kulukortti__keskiarvo {
+    font-size: 85%;
+    color: #666;
+}
