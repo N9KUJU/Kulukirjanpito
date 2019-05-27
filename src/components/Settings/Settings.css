@@ -1,0 +1,37 @@
+.settings {
+    padding: 2em;
+}
+
+.settings h3 {
+    margin-top: 0.5em;
+}
+
+.settings__items {
+    padding: 0.5em;
+    font-size: 1em;
+}
+
+.settings__items > div {
+    padding: 0.3em;
+    border-radius: 0.2em;
+}
+
+.settings__items > div:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settingsForm {
+    display: flex;
+    margin-top: 0.5em;
+    }
+
+.settingsForm input {
+    flex: 1 1 auto;
+    padding: 0.5em;
+    border: 1px solid #999;
+    border-radius: 0.3em;
+    font-size: 1em;
+    font-family: 'Nunito' , sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}    

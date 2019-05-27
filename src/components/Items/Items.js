@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { Link } from 'react-router-dom';
+
 import Kulukortti from '../Kulukortti/Kulukortti';
 import Content from '../Content/Content';
 import { FloatingButton } from '../buttons'; 
@@ -6,7 +9,8 @@ import { FloatingButton } from '../buttons';
 function Items(props) {
 
   let rows = props.data.map(invoice => {
-      return(<Kulukortti data={invoice} />)
+      return(
+      <Kulukortti data={invoice} key={invoice.id}/>)
     }
 
   );
@@ -14,7 +18,7 @@ function Items(props) {
     return(
       <Content >
         {rows}
-        <FloatingButton secondary>+</FloatingButton>
+        <Link to="/add"><FloatingButton secondary>+</FloatingButton></Link>
     </Content>
     );
   }
