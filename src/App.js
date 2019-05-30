@@ -18,16 +18,22 @@ class App extends Component {
       super(props);
       this.state = {
         data: testdata,
-        selectList: ["Puhelun", "Sähkö", "Vero", "Vesi", "Bensiini"]
+        selectList: ["Puhelin", "Sähkö", "Vero", "Vesi", "Bensiini"]
       }
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
       this.handleSelectListForm = this.handleSelectListForm.bind(this);
+      this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
   handleFormSubmit(newdata) {
     let storeddata = this.state.data.slice();
-    storeddata.push(newdata);
-    storeddata.sort((a,b) => { 
+    const index = storeddata.findIndex(item => item.id === newdata.id);
+    if (index >= 0) {
+      storeddata[index] =  newdata;
+    } else {
+      storeddata.push(newdata);
+    }
+      storeddata.sort((a,b) => { 
       const aDate = new Date(a.maksupaiva);
       const bDate = new Date(b.maksupaiva);
       return bDate.getTime() - aDate.getTime();
@@ -46,6 +52,14 @@ class App extends Component {
     });
   }
 
+  handleDeleteItem(id) {
+    let storeddata = this.state.data.slice();
+    storeddata = storeddata.filter(item => item.id !== id);
+    this.setState({
+      data: storeddata
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -53,9 +67,13 @@ class App extends Component {
         <Header />
         <Route path="/" exact render={() => <Items data={this.state.data} />} />
         <Route path="/stats" component={Stats} />
-    <Route path="/settings" render={() => <Settings selectList={this.state.selectList} onFormSubmit={this.handleSelectListForm} /> } />
+        <Route path="/settings" render={() => <Settings selectList={this.state.selectList} onFormSubmit={this.handleSelectListForm} /> } />
         <Route path="/add" render={() => <AddItem onFormSubmit={this.handleFormSubmit} selectList={this.state.selectList} />} />
-        <Route path="/edit" render={() => <EditItem selectList={this.state.selectList} />} />
+        <Route path="/edit/:id" render={(props) => <EditItem data={this.state.data} 
+                                                             selectList={this.state.selectList} 
+                                                             onFormSubmit={this.handleFormSubmit}
+                                                             onDeleteItem={this.handleDeleteItem} 
+                                                             {...props} />} />
 
         <Menu />
       </div>

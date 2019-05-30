@@ -5,6 +5,10 @@ import ItemForm from '../ItemForm/ItemForm';
 import './EditItem.css';
 
 function EditItem(props)  {
+
+    const index = props.data.findIndex(item => item.id === props.match.params.id);
+    let itemData = props.data[index];
+
     return(
       <Content >
 
@@ -12,7 +16,9 @@ function EditItem(props)  {
 
         <h2>Kulun muokkaaminen</h2>
 
-        <ItemForm onFormSubmit={props.onFormSubmit} selectList={props.selectList} />
+        
+
+        <ItemForm onFormSubmit={props.onFormSubmit} selectList={props.selectList} data={itemData} onDeleteItem={props.onDeleteItem} />
         
       </div>
 

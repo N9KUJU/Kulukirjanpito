@@ -8,20 +8,21 @@ class ItemForm extends React.Component {
 
     constructor(props) {
         super(props);
+        const data = props.data ? props.data : { 
+          tyyppi : "Vesi",
+          summa : 0,
+          maksupaiva : "",
+          kaudenalku : "",
+          kaudenloppu : "",
+          saaja : ""
+       }
         this.state = {
-            data: { 
-                tyyppi : "Vesi",
-                summa : 0,
-                maksupaiva : "",
-                kaudenalku : "",
-                kaudenloppu : "",
-                saaja : ""
-             }
+            data: data
         };
-
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
     handleInputChange(event) {
@@ -46,8 +47,14 @@ class ItemForm extends React.Component {
       event.preventDefault();
       let data = Object.assign({}, this.state.data);
       data.summa = parseFloat(data.summa);
-      data.id = uuid.v4();
+      data.id = data.id ? data.id : uuid.v4();
       this.props.onFormSubmit(data);
+      this.props.history.push("/");
+    }
+
+    handleDeleteItem(event) {
+      event.preventDefault();
+      this.props.onDeleteItem(this.state.data.id);
       this.props.history.push("/");
     }
 
@@ -105,9 +112,18 @@ class ItemForm extends React.Component {
                   <Button onClick={this.handleCancel}>Peruuta</Button>
                 </div>
                 <div>
-                  <Button type="submit"primary>Lisää</Button>
+                  <Button type="submit"primary>{this.state.data.id ? "Tallenna" : "Lisää"}</Button>
                 </div>
               </div>
+
+              { this.props.onDeleteItem ?
+                <div className="itemform__row">
+                  <div>
+                    <Button onClick={this.handleDeleteItem}>Poista</Button>
+                    </div>
+                    <div></div>  
+                    </div> : "" }
+            
   
             </div>
   
