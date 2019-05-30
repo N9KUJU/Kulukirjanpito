@@ -18,3 +18,10 @@
     flex: 1 1 auto;
 }
 
+.app_welcome {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+}
